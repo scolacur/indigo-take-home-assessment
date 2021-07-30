@@ -268,6 +268,7 @@
 	}
 
 	//Very basic async function to mimic an actual API call
+	//I prefer promises but those were introduced in ES6
 	function postData(data, errCb, successCb) {
 		try {
 			doStuffThatMightTakeAWhile()
