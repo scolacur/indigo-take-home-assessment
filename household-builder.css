@@ -1,0 +1,48 @@
+
+.list-container {
+	/* min-height: 50px; */
+	margin-top: 20px;
+	border: solid black 1px;
+	border-radius: 5px;
+	padding: 20px;
+	background-color: ghostwhite;
+}
+.empty-msg {
+
+}
+.entry {
+	border: solid black 1px;
+	margin: 0px 10px 10px 10px;
+	width: 50%;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: aliceblue;
+}
+
+.entry-header {
+	font-weight: bold;
+	margin: 0px 0px 5px 0px;
+}
+
+.field {
+	margin: 5px 0px;
+}
+
+.field-label {
+	margin-right: 5px;
+	display: inline
+}
+
+.field-value {
+	display: inline;
+}
+
+.field-value-age {}
+
+.field-value-rel {}
+
+.field-value-smoker {}
+
+.error-msg {
+	color: red;
+}
