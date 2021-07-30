@@ -95,30 +95,6 @@
 		addBtn.addEventListener('click', addEntry)
 	}
 
-	/*Add some attributes to existing elements for validation
-	(normally this would just be done directly in the HTML,
-	but can't modify HTML as per instructions)
-	*/
-	var inputs = document.getElementsByTagName('input')
-	var selects = document.getElementsByTagName('select')
-	Array.from(inputs).concat(Array.from(selects)).forEach(function(input) {
-		var field = state.fields[input.id]
-		if (field) {
-			if (field.required) {
-				input.required = true
-			}
-			if (field.type === 'number') {
-				input.type = 'number'
-			}
-			if (field.min !== undefined) {
-				input.min = field.min
-			}
-			if (field.max !== undefined) {
-				input.max = field.max
-			}
-		}
-	})
-
 	/*Add some useful HTML to the DOM*/
 
 	//A place to display the list in addition to the JSON read-out

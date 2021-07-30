@@ -6,6 +6,8 @@ To run the app, just open index.html in your browser.
 Thanks for giving me the opportunity to do this take-home challenge. I took a very functional approach, trying to abstract as much out into reusable functions as possible,
 and keeping all application-specific logic inside of the application state, sort of like a config.
 
+Basically, clicking "Add" updates the application client-side, and clicking "Submit" mimics saving the data to the server.
+
 The Javascript file does the following:
 - Initialize application state to keep track of data on the client
 - Append a stylesheet
