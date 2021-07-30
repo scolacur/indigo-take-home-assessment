@@ -26,7 +26,16 @@
 (function() {
 	if (!document) return
 
+	/****************/
+	/*Initialization*/
+	/****************/
+
 	//Initialize Application state
+
+	/*All of the application-specific information (field names & types), data schema,
+	lives on the state. The other parts of the component (initialization, methods)
+	are agnostic of what type of data they are displaying. This makes this
+	component very easily extendable to be used for a variety of applications.*/
 	var state = {
 		entries: {},
 		entryCount: 0,
@@ -71,7 +80,6 @@
 
 	document.getElementsByTagName('head')[0].appendChild(link)
 
-
 	/*Set up listeners*/
 	var form = document.querySelector('form')
 	if (form) {
@@ -83,6 +91,30 @@
 		addBtn.type = 'button'
 		addBtn.addEventListener('click', addEntry)
 	}
+
+	/*Add some attributes to existing elements for validation
+	(normally this would just be done directly in the HTML,
+	but can't modify HTML as per instructions)
+	*/
+	var inputs = document.getElementsByTagName('input')
+	var selects = document.getElementsByTagName('select')
+	Array.from(inputs).concat(Array.from(selects)).forEach(function(input) {
+		var field = state.fields[input.id]
+		if (field) {
+			if (field.required) {
+				input.required = true
+			}
+			if (field.type === 'number') {
+				input.type = 'number'
+			}
+			if (field.min !== undefined) {
+				input.min = field.min
+			}
+			if (field.max !== undefined) {
+				input.max = field.max
+			}
+		}
+	})
 
 	/*Add some useful HTML to the DOM*/
 
@@ -107,6 +139,9 @@
 	var errorMsgContainer  = document.createElement('div')
 	form.appendChild(errorMsgContainer)
 
+	/*********/
+	/*METHODS*/
+	/*********/
 
 	//Listener for "Add" button
 	function addEntry(e) {
@@ -130,8 +165,8 @@
 		renderData(state.entries)
 	}
 
-	//Pulls data from the form and converts to an object representing an entry
-	//to store on the state.
+	/*Pulls data from the form and converts to an object
+	representing an entry to store on the state.*/
 	function getFormData() {
 		var formData = new FormData(form)
 		var entry = {}
@@ -167,8 +202,6 @@
 
 		return entry
 	}
-
-	/*Validation logic*/
 
 	/*Validates an entry by individually validating each field based on that field's
 	validation rules. If any field is invalid, the whole entry is invalid. In this case,
@@ -224,9 +257,6 @@
 		}
 		return fieldIsValid
 	}
-	/*End of Validation Logic*/
-
-	/*Submission Logic*/
 
 	//"POST" data to "server", pass error and success handlers
 	function submit(e) {
@@ -247,8 +277,6 @@
 	function doStuffThatMightTakeAWhile() {
 		return true
 	}
-	/*End of Submission Logic*/
-
 
 	//Renders serialized JSON on page
 	function renderJSON(data) {
@@ -258,9 +286,11 @@
 	}
 
 	//Renders list of entries to the page
-	//In a real-world scenario, only the diff would be rendered. Frameworks like React make this easy.
-	//Here we are just clearing the contents and re-rendering the entire state.entries object.
-	//Data must be an Object
+	/*In a real-world scenario, only the diff would be rendered.
+	Frameworks like React make this easy. Here we are just clearing
+	the contents and re-rendering the entire state.entries object.
+	Important: Data must be an object
+	*/
 	function renderData(data) {
 		var listContainer = document.getElementsByClassName('list-container')[0]
 		if (listContainer) {
@@ -321,6 +351,8 @@
 		listContainer.appendChild(entryWrap)
 	}
 
+	//Helper function to format values displayed in list
+	//Capitalizes first character of strings and displays "Yes"/"No" for booleans
 	function formatValue(key, val) {
 		if (state.fields[key].type === 'string') {
 			return val.charAt(0).toUpperCase() + val.slice(1)
@@ -330,8 +362,6 @@
 			return val
 		}
 	}
-
-
 
 	//Remove entry by ID (client-side)
 	function removeEntry(id) {
