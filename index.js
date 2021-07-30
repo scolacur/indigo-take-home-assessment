@@ -43,7 +43,8 @@
 			empty: 'No household members to display',
 			entryHeader: 'Member'
 		},
-		//Abstraction so that as much of the component is reusable as possible
+		//Abstraction so that as much of the component is reusable as possible.
+		//Ideally a framework would be used to build form component HTML from this object.
 		fields: {
 			'age': {
 				type: 'number',
@@ -52,21 +53,21 @@
 				required: true,
 				min: 0,
 				max: Infinity,
-				validationErrText: 'Age is required and must be a number > 0.',
+				validationErrText: 'Age is required and must be a number > 0.'
 			},
 			'rel': {
 				type: 'string',
 				input: 'select',
 				label: 'Relationship',
 				required: true,
-				validationErrText: 'Relationship is required.',
+				validationErrText: 'Relationship is required.'
 			},
 			'smoker': {
 				type: 'boolean',
 				input: 'checkbox',
 				label: 'Smoker?',
 				required: false,
-				validationErrText: '',
+				validationErrText: ''
 			}
 		}
 	}
@@ -83,7 +84,7 @@
 	/*Set up listeners*/
 	var form = document.querySelector('form')
 	if (form) {
-		form.addEventListener('submit', submit);
+		form.addEventListener('submit', submit)
 	}
 
 	var addBtn = document.getElementsByClassName('add')[0]
