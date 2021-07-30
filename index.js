@@ -43,8 +43,10 @@
 			empty: 'No household members to display',
 			entryHeader: 'Member'
 		},
-		//Abstraction so that as much of the component is reusable as possible.
-		//Ideally a framework would be used to build form component HTML from this object.
+		/*We could actually build the whole form component HTML from this object,
+		possibly via a framework. But since we can't modify the HTML,
+		instead this object is just set up to mirror what's already in the HTML.
+		*/
 		fields: {
 			'age': {
 				type: 'number',
